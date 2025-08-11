@@ -16,11 +16,12 @@ public:
         if(p==NULL && q!=NULL) return false;
         if(p!=NULL && q==NULL) return false;
         if(p->val != q->val) return false;
-        bool leftsub = isSameTree(p->left,q->left);
-        if(!leftsub) return false;
-        bool rightsub = isSameTree(p->right,q->right);
-        if(!rightsub) return false;
+        // bool leftsub = isSameTree(p->left,q->left);
+        // if(!leftsub) return false;
+        // bool rightsub = isSameTree(p->right,q->right);
+        // if(!rightsub) return false;
 
-        return true;
+        // return true;
+        return (isSameTree(p->left,q->left) && isSameTree(p->right,q->right));
     }
 };
