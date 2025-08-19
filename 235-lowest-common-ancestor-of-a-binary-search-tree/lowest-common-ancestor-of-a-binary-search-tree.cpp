@@ -10,16 +10,19 @@
 
 class Solution {
 public:
-    bool exist(TreeNode* root, TreeNode* p){
-        if(root==NULL) return false;
-        if(root==p) return true;
-        return exist(root->left,p) || exist(root->right,p);
-    }
+    // bool exist(TreeNode* root, TreeNode* p){
+    //     if(root==NULL) return false;
+    //     if(root==p) return true;
+    //     return exist(root->left,p) || exist(root->right,p);
+    // }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root==p || root==q) return root;
-        else if(exist(root->left,p) && exist(root->right,q)) return root;
-        else if(exist(root->right,p) && exist(root->left,q)) return root;
-        else if(exist(root->left,p) && exist(root->left,q)) return lowestCommonAncestor(root->left,p,q);
-        else return lowestCommonAncestor(root->right,p,q);
+        // if(root==p || root==q) return root;
+        // else if(exist(root->left,p) && exist(root->right,q)) return root;
+        // else if(exist(root->right,p) && exist(root->left,q)) return root;
+        // else if(exist(root->left,p) && exist(root->left,q)) return lowestCommonAncestor(root->left,p,q);
+        // else return lowestCommonAncestor(root->right,p,q);
+        if(root->val < p->val && root->val < q->val) return lowestCommonAncestor(root->right,p,q);
+        else if(root->val > p->val && root->val > q->val) return lowestCommonAncestor(root->left,p,q);
+        return root; 
     }
 };
