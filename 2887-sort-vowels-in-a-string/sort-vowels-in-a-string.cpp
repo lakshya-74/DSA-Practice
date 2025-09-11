@@ -17,6 +17,5 @@ public:
             if(s[i]=='0') s[i] = st[t++];
         }
         return s;
-
     }
 };
