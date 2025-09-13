@@ -5,14 +5,17 @@ public:
     }
     int maxFreqSum(string s) {
         map<char,int> m1;
-        map<char,int> m2;
-        for(int i=0;i<s.size();i++){
-            if(isvowel(s[i])) m1[s[i]]++;
-            else m2[s[i]]++;
-        }
         int a1 = 0 , a2 = 0;
-        for(auto x:m1) a1 = max(a1,x.second);
-        for(auto x:m2) a2 = max(a2,x.second);
+        for(int i=0;i<s.size();i++){
+            if(isvowel(s[i])){
+                m1[s[i]]++;
+                a1 = max(a1,m1[s[i]]);
+            }
+            else{
+                m1[s[i]]++;
+                a2 = max(a2,m1[s[i]]);
+            }
+        }
         return a1+a2;
     }
 };
