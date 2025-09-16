@@ -16,23 +16,32 @@ public:
         // return val;
 
         vector<int> population(101,0);
+        int idx = -1;
+        int maxvalue = 0;
+        int mx = 0;
         for(auto &x:logs){
             population[x[0]-1950]++;
             population[x[1]-1950]--;
         }
-        vector<int> pre(101);
-        pre[0] = population[0];
-        for(int i=1;i<101;i++){
-            pre[i] = pre[i-1] + population[i];
-        }
-        int idx = -1;
-        int maxvalue = 0;
         for(int i=0;i<101;i++){
-            if(pre[i]>maxvalue){
-                maxvalue = pre[i];
+            mx += population[i];
+            if(mx>maxvalue){
+                maxvalue = mx;
                 idx = i;
             }
         }
+        // vector<int> pre(101);
+        // pre[0] = population[0];
+        // for(int i=1;i<101;i++){
+        //     pre[i] = pre[i-1] + population[i];
+        // }
+        
+        // for(int i=0;i<101;i++){
+        //     if(pre[i]>maxvalue){
+        //         maxvalue = pre[i];
+        //         idx = i;
+        //     }
+        // }
         return idx+1950;
     }
 };
