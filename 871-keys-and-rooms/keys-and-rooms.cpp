@@ -1,30 +1,24 @@
 class Solution {
 public:
-    vector<list<int>> graph;
-    vector<int> visited; 
-    void addGraph(int src,int dest){
-        graph[src].push_back(dest);
-    }
-    void dfs(int src ,int dest){
-        visited[src] = 1;
-        for(auto x:graph[src]){
-            if(visited[x]==0){
-                dfs(x,dest);
-            }
-        }
-    }
+    vector<int> visited;
     bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        graph.resize(rooms.size());
-        for(int i=0;i<rooms.size();i++){
-            for(int j=0;j<rooms[i].size();j++){
-                addGraph(i,rooms[i][j]);
+       visited.resize(rooms.size(),0);
+       queue<int> q;
+       q.push(0);
+       while(q.size()){
+            int curr = q.front();
+            q.pop();
+            visited[curr] = 1;
+            for(int i=0;i<rooms[curr].size();i++){
+                if(visited[rooms[curr][i]]==0){
+                    q.push(rooms[curr][i]);
+                    visited[rooms[curr][i]] = 1;
+                }    
             }
-        }
-        visited.resize(rooms.size(),0);
-        dfs(0,rooms.size()-1);
-        for(int i=0;i<rooms.size();i++){
-            if(visited[i]==0) return false;
-        }
-        return true;
+       }
+       for(int i=0;i<rooms.size();i++){
+        if(visited[i]==0) return false;
+       }
+       return true;
     }
 };
