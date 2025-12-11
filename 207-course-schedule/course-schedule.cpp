@@ -1,0 +1,43 @@
+class Solution {
+public:
+vector<vector<int>> graph;
+void toposort(int &count,int n){
+    vector<int> indegree(n,0);
+    for(int i=0;i<n;i++){
+        for(auto x:graph[i]){
+            indegree[x]++;
+        }
+    }
+    vector<bool> visited(n,false);
+    queue<int> q;
+    for(int i=0;i<n;i++){
+        if(indegree[i]==0){
+            q.push(i);
+            visited[i] = true;
+        }
+    }
+    while(q.size()){
+        int curr = q.front();
+        count++;
+        q.pop();
+        for(auto x:graph[curr]){
+            if(!visited[x]){
+                indegree[x]--;
+                if(indegree[x]==0){
+                    visited[x] = true;
+                    q.push(x);
+                }
+            }
+        }
+    }
+}
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        graph.resize(numCourses);
+        for(int i=0;i<prerequisites.size();i++){
+            graph[prerequisites[i][1]].push_back(prerequisites[i][0]);
+        }
+        int count = 0;
+        toposort(count,numCourses);
+        return count==numCourses;
+    }
+};
