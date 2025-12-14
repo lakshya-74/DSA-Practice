@@ -3,6 +3,11 @@ public:
     int rows , cols;
     vector<vector<int>> dir = {{1,0},{-1,0},{0,1},{0,-1}};
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        // its method of simultaneous use of multiple elemtns in bfs/dfs 
+        // here we uses reverse technique or say think in reverse way 
+        // start from pacific and go inside if neighbour is >= current and mark visited same from atlantic then take common values from atlantic and pacific thats our answer 
+        // if any index is visited once means we can come there no need to checck or find the path
+        
         rows = heights.size();
         cols = heights[0].size();
         queue<pair<int,int>> q1,q2;
