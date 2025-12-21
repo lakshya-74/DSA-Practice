@@ -5,7 +5,8 @@ public:
         while(i<haystack.size()){
             int j = 0;
             int k = i;
-            while(k<haystack.size() && j<needle.size() && haystack[k]==needle[j]){
+            while(k<
+            haystack.size() && j<needle.size() && haystack[k]==needle[j]){
                 k++;
                 j++;
             };
