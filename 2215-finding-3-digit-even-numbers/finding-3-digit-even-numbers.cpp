@@ -1,5 +1,13 @@
 class Solution {
 public:
+    bool check(map<int,int> &mpp , int a){
+        if(mpp.find(a)!=mpp.end()){
+            mpp[a]--;
+            if(mpp[a]==0) mpp.erase(a);
+            return true;
+        }
+        return false;
+    }
     vector<int> findEvenNumbers(vector<int>& digits) {
         map<int,int> mpp;
         for(auto &x:digits){
@@ -13,19 +21,29 @@ public:
             int b = x%10;
             x /= 10;
             int c = x;
-            if(mpp.find(a)!=mpp.end()){
-                mpp[a]--;
-                if(mpp[a]==0) mpp.erase(a);
-                if(mpp.find(b)!=mpp.end()){
-                    mpp[b]--;
-                    if(mpp[b]==0) mpp.erase(b);
-                    if(mpp.find(c)!=mpp.end()){
+            if(check(mpp,a)){
+                if(check(mpp,b)){
+                    if(check(mpp,c)){
                         ans.push_back(i);
+                        mpp[c]++;
                     }
                     mpp[b]++;
                 }
-                mpp[a]++; // add for next iteration
+                mpp[a]++;
             }
+            // if(mpp.find(a)!=mpp.end()){
+            //     mpp[a]--;
+            //     if(mpp[a]==0) mpp.erase(a);
+            //     if(mpp.find(b)!=mpp.end()){
+            //         mpp[b]--;
+            //         if(mpp[b]==0) mpp.erase(b);
+            //         if(mpp.find(c)!=mpp.end()){
+            //             ans.push_back(i);
+            //         }
+            //         mpp[b]++;
+            //     }
+            //     mpp[a]++; // add for next iteration
+            // }
         }
         return ans;
     }
