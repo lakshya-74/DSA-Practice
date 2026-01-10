@@ -10,6 +10,7 @@ public:
         int ans = 1e8;
         for(int k=0;k<n;k++){
            if(k!=j) ans = min(ans,grid[i][j] + rec(i-1,k,grid,dp));
+           
         }
         return dp[i][j] = ans;
     }
