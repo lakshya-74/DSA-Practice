@@ -1,25 +1,26 @@
 class Solution {
 public:
-    int dp[101][101];
-    int rec(int i , int j ,vector<vector<int>>& matrix){
+    int rec(int i , int j ,vector<vector<int>>& matrix,vector<vector<int>>& dp){
         int n = matrix.size();
-        if(i<0 || j<0 || j>=n) return 1e5;
-        if(i>=n) return 0;
+        if(j<0 || j>=n) return 1e5;
+        if(i==n-1) return matrix[i][j];
         if(dp[i][j]!=-1) return dp[i][j];
-        int x = matrix[i][j] + rec(i+1,j,matrix);
-        int y = matrix[i][j] + rec(i+1,j+1,matrix);
-        int z = matrix[i][j] + rec(i+1,j-1,matrix);
+        int x = matrix[i][j] + rec(i+1,j,matrix,dp);
+        int y = matrix[i][j] + rec(i+1,j+1,matrix,dp);
+        int z = matrix[i][j] + rec(i+1,j-1,matrix,dp);
         return dp[i][j] = min(x,min(y,z));
     }
     int minFallingPathSum(vector<vector<int>>& matrix) {
         // int ans = INT_MAX;
-        int n = matrix.size();
-        // memset(dp,-1,sizeof(dp));
+        // int n = matrix.size();
+        // vector<vector<int>> dp(n,vector<int>(n,-1));
         // for(int i=0;i<n;i++){
-        //     ans = min(ans,rec(0,i,matrix));
+        //     ans = min(ans,rec(0,i,matrix,dp));
         // }
         // return ans;
 
+        // ----> tabulation
+        int n = matrix.size();
         vector<int> check(n);
         for(int i=0;i<n;i++){
             check[i] = matrix[n-1][i];
