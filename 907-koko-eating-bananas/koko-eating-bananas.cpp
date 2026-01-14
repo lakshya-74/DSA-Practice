@@ -1,9 +1,10 @@
 class Solution {
 public:
-    long long check(int speed , vector<int>& arr){
-        long long ans = 0;
+    int check(int speed , vector<int>& arr,int h){
+        int ans = 0;
         for(int i=0;i<arr.size();i++){
-            ans += (arr[i]+(long long)speed-1)/(long long)speed;
+            ans += (arr[i]+speed-1)/speed;
+            if(ans>h) return ans;
         }
         return ans;
     }
@@ -17,7 +18,7 @@ public:
         int ans;
         while(lo<=hi){
             int mid = lo + (hi-lo)/2;
-            if(check(mid,piles)<=h){
+            if(check(mid,piles,h)<=h){
                 ans = mid;
                 hi = mid-1;
             }
