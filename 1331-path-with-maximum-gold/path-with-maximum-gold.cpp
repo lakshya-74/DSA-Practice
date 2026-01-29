@@ -7,12 +7,12 @@ public:
         if(i<0 || j<0 ||i>=n || j>=m || grid[i][j]==0) return 0;
         if(visited[i][j]) return 0;
         visited[i][j] = 1;
-        int a = rec(i+1,j,grid);
-        int b = rec(i-1,j,grid);
-        int c = rec(i,j+1,grid);
-        int d = rec(i,j-1,grid);
+        int a = grid[i][j] + rec(i+1,j,grid);
+        int b = grid[i][j] + rec(i-1,j,grid);
+        int c = grid[i][j] + rec(i,j+1,grid);
+        int d = grid[i][j] + rec(i,j-1,grid);
         visited[i][j] = 0;
-        return grid[i][j] + max(a,max(b,max(c,d)));
+        return max(a,max(b,max(c,d)));
     }
     int getMaximumGold(vector<vector<int>>& grid) {
         int ans = 0;
