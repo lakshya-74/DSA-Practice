@@ -4,7 +4,7 @@ public:
         int ans = 0;
         int n = s.size();
         if(n==1) return 1;
-        set<char> st;
+        unordered_set<char> st;
         int l = 0 , r = 0;
         while(r<n){
             while(st.count(s[r])){
