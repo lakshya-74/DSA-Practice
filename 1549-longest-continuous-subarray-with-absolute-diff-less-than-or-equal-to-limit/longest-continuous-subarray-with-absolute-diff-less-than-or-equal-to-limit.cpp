@@ -11,13 +11,22 @@ public:
             mn.push({nums[r],r});
             mx.push({nums[r],r});
             while((mx.top().first - mn.top().first)>limit){
-                l = min(mx.top().second,mn.top().second) + 1;
-                while(mn.top().second<l){
-                    mn.pop();
+                if(mx.top().second > mn.top().second){
+                    int x = mn.top().second +1;
+                    while(mn.top().second<x){
+                        mn.pop();
+                    }
+                    l = x;
                 }
-                while(mx.top().second<l) mx.pop();
+                else{
+                    int x = mx.top().second +1;
+                    while(mx.top().second<x){
+                        mx.pop();
+                    }
+                    l = x;
+                }
             }
-            ans = max(ans,r-l+1);
+            if((mx.top().first - mn.top().first)<=limit) ans = max(ans,r-l+1);
             r++;
         }
         return ans;
