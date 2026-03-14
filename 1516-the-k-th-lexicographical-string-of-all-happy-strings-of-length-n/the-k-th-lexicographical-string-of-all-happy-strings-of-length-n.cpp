@@ -11,6 +11,7 @@ public:
             return;
         }
         for(int i=0;i<3;i++){
+            if(k==0) return;
             if(v[i]!=c){ 
                 s += v[i];
                 rec(idx+1,n,k,v[i],s);
