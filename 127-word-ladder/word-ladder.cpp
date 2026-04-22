@@ -2,6 +2,14 @@ class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         int n = wordList.size();
+        bool flag = false;
+        for(int i=0;i<n;i++){
+            if(wordList[i]==endWord){
+                flag = true;
+                break;
+            }
+        }
+        if(!flag) return 0;
         int ans = 1;
         queue<string> q;
         q.push(beginWord);
