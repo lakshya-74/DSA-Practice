@@ -26,15 +26,19 @@ public:
         }
         for(int i=0;i<n;i++){
             int a= stones[i][0];
-            int b = stones[i][1] + mxr + 1;
+            int b = stones[i][1] + mxr + 1; // for row and col i uses different nodes
             Union(a,b);
             st.insert(a);
             st.insert(b);
         } 
-        int count =0;
+        int count =0; 
+        // this count is used for efficient counting of no. of components
         for(auto x:st){
             if(find(x)==x) count++;
         }
+        // ans = n- no. of componenets
+        // logic -> from each there is one node that is not reachable so from each comp. our ans
+        // is com. size -1 , and sum of all the comp. elemens is nothing but n and sub. occur no. of comp. times 
         return n-count;
     }
 };
