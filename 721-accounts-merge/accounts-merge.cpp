@@ -18,7 +18,7 @@ public:
         for(int i=0;i<n;i++){
             parent[i] = i;
         }
-        map<string,int> mpp;
+        unordered_map<string,int> mpp;
         for(int i=0;i<n;i++){
             for(int j=1;j<accounts[i].size();j++){
                 string s = accounts[i][j];
