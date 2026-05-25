@@ -20,16 +20,18 @@ public:
 
         vector<int> t(n,0);
         t[0] = 1;
-        int count =0;
-        for(int i=1;i<n;i++){
-            if(i-minJump>=0){
-                count += t[i-minJump];
+        int max_dist = 0;
+        for(int i=0;i<n;i++){
+            if(!t[i]) continue;
+            int st = max(i+minJump,max_dist+1);
+            int end = min(i+maxJump,n-1);
+            for(int j=st;j<=end;j++){
+                if(s[j]=='0'){
+                    t[j] = 1;
+                }
             }
-            if(i-maxJump-1>=0){
-                count -= t[i-maxJump-1];
-            }
-            if(count>0 && s[i]=='0') t[i] = 1;
+            max_dist = max(max_dist,end);
         }
-        return t[n-1]>0;
+        return t[n-1];
     }
 };
