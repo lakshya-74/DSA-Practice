@@ -2,7 +2,7 @@ class Solution {
 public:
     int numberOfSpecialChars(string word) {
         int n = word.size();
-        set<char> st ,st1 , st2;
+        unordered_set<char> st ,st1 , st2;
         for(int i=0;i<n;i++){
             if(word[i]>='A' && word[i]<='Z'){
                 if(st.count(word[i])){
