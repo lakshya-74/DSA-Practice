@@ -2,14 +2,13 @@ class Solution {
 public:
     #define ll long long
     int mod = 1e9 + 7;
-    long long power(long long a,long long b){
-        long long res = 1;
-        while(b){
-            if(b&1) res = res*a%mod;
-            a = a*a%mod;
-            b >>= 1;
-        }
-        return res;
+    ll rec(int curr , int parity , int h , vector<vector<int>>& dp){
+        if(curr==h) return dp[curr][parity] = !parity;
+        if(dp[curr][parity]!=-1) return dp[curr][parity];
+        ll ans = 0;
+        ans += rec(curr+1,!parity,h,dp);
+        ans += rec(curr+1,parity,h,dp);
+        return dp[curr][parity] = ans%mod;
     }
     int assignEdgeWeights(vector<vector<int>>& edges) {
         int n = edges.size() + 1;
@@ -41,24 +40,10 @@ public:
         }
         h--;
         cout<<h;
-        vector<pair<int,int>> v;
-        for(int i=1;i<=h;i+=2) v.push_back({i,h-i});
-        int ans = 0;
-    
-        vector<long long> fact(h+1),invFact(h+1);
-        fact[0] = 1;
-        for(int i=1;i<=h;i++)
-            fact[i] = (fact[i-1] * i)%mod;
-
-        invFact[h] = power(fact[h], mod-2);
-        for(int i=h-1;i>=0;i--)
-            invFact[i] = invFact[i+1]*(i+1)%mod;
-        for(int i=0;i<v.size();i++){
-            ll a = v[i].first;
-            ll b = v[i].second;
-            long long ways =fact[h] * invFact[a] % mod * invFact[b] % mod;
-            ans = (ans + ways)%mod;
-        }
-        return ans;
+        vector<vector<int>> dp(h+1,vector<int>(2,-1));
+        ll ans =0;
+        ans += rec(0,0,h-1,dp);
+        ans += rec(0,1,h-1,dp);
+        return ans%mod;
     }
 };
