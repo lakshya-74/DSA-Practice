@@ -2,6 +2,8 @@ class Solution {
 public:
     #define ll long long
     #define pp pair<int,int>
+    // here we have to make sure that each edge we are traversing have weight >=mid and the total sum till n-1 should be <= k
+    // generally if you have to find min weight path we use dijsktra although it is correct in this question also , but here we had given DAG so we can use topo order and calulate the min weight till n-1 edge using dp
     bool check(ll x, vector<vector<pp>>& adj,vector<int>& topo,ll k){
         int n = adj.size();
         vector<ll> dp(n,1e18);
