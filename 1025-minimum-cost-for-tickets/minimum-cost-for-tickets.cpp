@@ -16,7 +16,19 @@ public:
         for(auto x:days){
             v[x] = 1;
         }
-        vector<int> dp(mx+1,-1);
-        return rec(0,v,costs,dp);
+        // vector<int> dp(mx+1,-1);
+        // return rec(1,v,costs,dp);
+
+        vector<int> dp(mx+1,0);
+        for(int idx=1;idx<=mx;idx++){
+            if(v[idx]==0) dp[idx] = dp[idx-1];
+            else{
+                int a = costs[0] + dp[max(0,idx-1)];
+                int b = costs[1] + dp[max(0,idx-7)];
+                int c = costs[2] + dp[max(0,idx-30)];
+                dp[idx] = min({a,b,c});
+            }
+        }
+        return dp[mx];
     }
 };
