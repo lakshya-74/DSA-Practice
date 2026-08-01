@@ -8,9 +8,10 @@ public:
         return dp[i][j] = max(a,b);
     }
     bool stoneGame(vector<int>& nums) {
-        int n = nums.size();
-        if(n==1) return true;
-        vector<vector<int>> dp(n, vector<int>(n,-1));
-        return rec(0,n-1,dp,nums)>=0;
+        return true;
+        // int n = nums.size();
+        // if(n==1) return true;
+        // vector<vector<int>> dp(n, vector<int>(n,-1));
+        // return rec(0,n-1,dp,nums)>=0;
     }
 };
