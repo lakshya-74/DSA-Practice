@@ -11,30 +11,47 @@
  */
 class Solution {
 public:
-    int totallevels(TreeNode* root){
-        if(root==NULL) return 0;
-        return 1 + max(totallevels(root->left),totallevels(root->right));
-    }
-    void checkelement(TreeNode* root,int curr,int target,vector<int>&v){
-        if(root==NULL) return;
-        if(curr==target){
-            v.push_back(root->val);
-            return;
-        }
-        checkelement(root->left,curr+1,target,v);
-        checkelement(root->right,curr+1,target,v);
-    }
-    void levels(TreeNode* root,vector<vector<int>> &ans){
-        int n = totallevels(root);
-        for(int i=1;i<=n;i++){
+    // int totallevels(TreeNode* root){
+    //     if(root==NULL) return 0;
+    //     return 1 + max(totallevels(root->left),totallevels(root->right));
+    // }
+    // void checkelement(TreeNode* root,int curr,int target,vector<int>&v){
+    //     if(root==NULL) return;
+    //     if(curr==target){
+    //         v.push_back(root->val);
+    //         return;
+    //     }
+    //     checkelement(root->left,curr+1,target,v);
+    //     checkelement(root->right,curr+1,target,v);
+    // }
+    // void levels(TreeNode* root,vector<vector<int>> &ans){
+    //     int n = totallevels(root);
+    //     for(int i=1;i<=n;i++){
+    //         vector<int> v;
+    //         checkelement(root,1,i,v);
+    //         ans.push_back(v);
+    //     }
+    // }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        // vector<vector<int>> ans;
+        // levels(root,ans);
+        // return ans;
+        vector<vector<int>> ans;
+        if(!root) return ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int sz = q.size();
             vector<int> v;
-            checkelement(root,1,i,v);
+            while(sz--){
+                TreeNode* curr = q.front();
+                q.pop();
+                v.push_back(curr->val);
+                if(curr->left) q.push(curr->left);
+                if(curr->right) q.push(curr->right);
+            }
             ans.push_back(v);
         }
-    }
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> ans;
-        levels(root,ans);
         return ans;
     }    
 };
