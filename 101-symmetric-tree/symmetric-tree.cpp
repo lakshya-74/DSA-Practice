@@ -27,9 +27,11 @@ public:
         return root;
      }
     bool isSymmetric(TreeNode* root) {
+
+        // first inverse the left side so that it becomes similar
+        // and then check for each value of left and right if its different then false
         if(root==NULL) return true;
         inverse(root->left);
-        bool flag = check(root->left,root->right);
-        return flag;
+        return check(root->left,root->right);
     }
 };
