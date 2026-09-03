@@ -11,7 +11,7 @@ public:
         bool even_check = true;
         //check for even 
         for(int i=0;i<n;i++){
-            if(nums[i]&1){
+            if(nums[i]&1 && nums[i]-sm_odd<1){
                 even_check = false;
                 break;
             }
