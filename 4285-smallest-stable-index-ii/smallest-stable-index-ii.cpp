@@ -7,11 +7,10 @@ public:
         for(int i=n-2;i>=0;i--){
             suff[i] = min(suff[i+1],nums[i]);
         }
-        int mx = -1;
+        int mx = 0;
         for(int i=0;i<n;i++){
             mx = max(nums[i],mx);
-            int x = mx - suff[i];
-            if(x<=k) return i;
+            if(mx-suff[i]<=k) return i;
         }
         return -1;
     }
