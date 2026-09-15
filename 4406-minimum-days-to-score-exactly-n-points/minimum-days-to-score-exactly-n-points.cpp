@@ -26,7 +26,7 @@ public:
                 if(sum>i) break;
                 int rem = i - sum;
                 if(rem==0) dp[i] = min(dp[i],k);
-                else if(dp[rem]!=1e9) dp[i] = min(dp[i],dp[rem]+1+k);
+                else dp[i] = min(dp[i],dp[rem]+1+k);
             }
         }
         return dp[n];
