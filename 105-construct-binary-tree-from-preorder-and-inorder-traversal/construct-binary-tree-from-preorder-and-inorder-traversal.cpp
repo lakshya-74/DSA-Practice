@@ -11,23 +11,21 @@
  */
 class Solution {
 public:
-    TreeNode* build(vector<int> &pre , vector<int> &in, int prel, int preh, int inl , int inh){
-        if(prel>preh) return NULL;
-        TreeNode* root = new TreeNode(pre[prel]);
-        if(prel==preh) return root;
-        int i = inl;
-        while(i<=inh){
-            if(in[i]==pre[prel]) break;
-            i++;
-        }
-        int leftcount = i-inl;
-        int rightcount = inh-i;
-        root->left = build(pre,in,prel+1,prel+leftcount,inl,i-1);
-        root->right = build(pre,in,prel+leftcount+1,preh,i+1,inh);
+    TreeNode* build(vector<int>& pre , int pres, int pree , vector<int>& inorder , int ins , int ine , map<int,int>& mpp){
+        if(pres>pree || ins>ine) return NULL;
+        TreeNode* root = new TreeNode(pre[pres]);
+        int inidx = mpp[pre[pres]];
+        int sz = inidx - ins;
+        root->left = build(pre,pres+1,pres+sz,inorder,ins,inidx-1,mpp);
+        root->right = build(pre,pres+sz+1,pree,inorder,inidx+1,ine,mpp);
         return root;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        int n = preorder.size();
-        return build(preorder,inorder,0,n-1,0,n-1);
+        map<int,int> mpp;
+        for(int i=0;i<preorder.size();i++){
+            mpp[inorder[i]] = i;
+        }
+        TreeNode* root = build(preorder,0,preorder.size()-1,inorder ,0,inorder.size()-1,mpp);
+        return root;
     }
 };
