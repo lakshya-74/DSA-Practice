@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int mod = 1e9 + 7;
+    int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
+        vector<pair<int, int>> ess(n);
+        for (int i = 0; i < n; ++i)
+            ess[i] = {efficiency[i], speed[i]};
+        sort(ess.rbegin(),ess.rend());
+        long sumS = 0, res = 0;
+        priority_queue <int, vector<int>, greater<int>> pq; 
+        for(auto& [e, s]: ess){
+            pq.push(s);
+            sumS += s;
+            if (pq.size() > k) {
+                sumS -= pq.top();
+                pq.pop();
+            }
+            res = max(res, sumS * e);
+        }
+        return res % mod;
+    }
+};
